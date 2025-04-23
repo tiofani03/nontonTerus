@@ -27,15 +27,11 @@ class HeaderInterceptor(
         val requestBuilder = request.newBuilder()
             .header(HEADER_TIME_ZONE, timeZone.toString())
 
-        runBlocking {
-            withContext(ioDispatcher) {
-                requestBuilder.header(
-                    HEADER_AUTHORIZATION,
-                    "Bearer ${Constant.API_KEY}"
-                )
-                requestBuilder.header("accept", "application/json")
-            }
-        }
+        requestBuilder.header(
+            HEADER_AUTHORIZATION,
+            "Bearer ${Constant.API_KEY}"
+        )
+        requestBuilder.header("accept", "application/json")
 
         val requestBuild = requestBuilder.build()
         return chain.proceed(requestBuild)
