@@ -1,0 +1,33 @@
+dependencies {
+    // datastore
+    implementation(libs.androidx.datastore)
+    implementation(libs.androidx.datastore.preferences)
+
+    // koin
+    implementation(project.dependencies.platform(libs.koin.bom))
+    implementation(libs.koin.core)
+    implementation(libs.koin.android)
+
+    // Retrofit
+    implementation(libs.retrofit)
+    implementation(libs.converter.gson)
+    implementation(libs.retrofit2.kotlinx.serialization.converter)
+    implementation(libs.kotlinx.serialization.json)
+
+    // voyager
+    implementation(libs.voyager.navigator)
+    implementation(libs.voyager.transitions)
+    implementation(libs.voyager.screenmodel)
+    implementation(libs.voyager.koin)
+
+    // paging 3
+    implementation(libs.androidx.paging.runtime.ktx)
+    implementation(libs.androidx.paging.compose)
+
+    // room
+    implementation(libs.androidx.room.runtime)
+    implementation(libs.androidx.room.paging)
+    ksp(libs.room.compiler)
+
+    debugImplementation("com.github.chuckerteam.chucker:library:4.1.0")
+}

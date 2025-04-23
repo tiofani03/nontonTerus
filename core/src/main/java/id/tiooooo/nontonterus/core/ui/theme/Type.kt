@@ -1,11 +1,11 @@
-package id.tiooooo.nontonterus.ui.theme
+package id.tiooooo.nontonterus.core.ui.theme
 
 import androidx.compose.material3.Typography
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.text.font.FontFamily
 import androidx.compose.ui.text.googlefonts.Font
 import androidx.compose.ui.text.googlefonts.GoogleFont
-import id.tiooooo.nontonterus.R
+import id.tiooooo.nontonterus.core.R
 
 val fontName = GoogleFont("Plus Jakarta Sans")
 

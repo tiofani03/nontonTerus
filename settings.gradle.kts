@@ -21,3 +21,5 @@ dependencyResolutionManagement {
 
 rootProject.name = "NontonTerus"
 include(":app")
+include(":core")
+include(":data:movie")
