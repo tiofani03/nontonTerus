@@ -63,6 +63,7 @@ dependencies {
 
     // lottie
     implementation(libs.lottie.compose)
+    implementation("com.pierfrancescosoffritti.androidyoutubeplayer:core:12.1.0")
 
     // test
     testImplementation(libs.junit)
