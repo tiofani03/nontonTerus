@@ -11,5 +11,5 @@ val localModule = module {
             .fallbackToDestructiveMigration(false)
             .build()
     }
-    single { get<NontonTerusDatabase>().dummyDao() }
+    single { get<NontonTerusDatabase>().searchHistoryDao() }
 }
