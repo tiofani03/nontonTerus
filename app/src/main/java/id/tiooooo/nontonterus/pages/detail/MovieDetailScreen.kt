@@ -1,5 +1,6 @@
 package id.tiooooo.nontonterus.pages.detail
 
+import androidx.compose.foundation.background
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.PaddingValues
@@ -7,10 +8,9 @@ import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.layout.padding
-import androidx.compose.foundation.layout.wrapContentHeight
-import androidx.compose.foundation.layout.wrapContentWidth
+import androidx.compose.foundation.layout.size
 import androidx.compose.foundation.lazy.LazyColumn
-import androidx.compose.material3.CircularProgressIndicator
+import androidx.compose.material3.MaterialTheme
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.LaunchedEffect
 import androidx.compose.runtime.collectAsState
@@ -22,16 +22,21 @@ import androidx.compose.ui.unit.dp
 import cafe.adriel.voyager.navigator.LocalNavigator
 import cafe.adriel.voyager.navigator.currentOrThrow
 import id.tiooooo.nontonterus.core.network.data.States
+import id.tiooooo.nontonterus.core.network.data.onError
 import id.tiooooo.nontonterus.core.network.data.onLoading
 import id.tiooooo.nontonterus.core.network.data.onSuccess
 import id.tiooooo.nontonterus.core.ui.base.BaseScaffold
+import id.tiooooo.nontonterus.core.ui.component.AnimatedPreloader
+import id.tiooooo.nontonterus.core.ui.component.BaseEmptyView
+import id.tiooooo.nontonterus.core.ui.component.BasicTopBarTitleView
 import id.tiooooo.nontonterus.core.ui.theme.EXTRA_EXTRA_HUGE_PADDING
 import id.tiooooo.nontonterus.core.ui.theme.MEDIUM_PADDING
+import id.tiooooo.nontonterus.core.utils.localization.stringRes
 import id.tiooooo.nontonterus.core.utils.pushOnce
 import id.tiooooo.nontonterus.pages.detail.component.MovieDetailImageView
+import id.tiooooo.nontonterus.pages.detail.component.MovieDetailOverviewSection
 import id.tiooooo.nontonterus.pages.detail.component.MovieDetailRatingView
 import id.tiooooo.nontonterus.pages.detail.component.MovieDetailTitleView
-import id.tiooooo.nontonterus.pages.detail.component.MovieDetailOverviewSection
 import id.tiooooo.nontonterus.pages.detail.component.review.MovieDetailReviewsSection
 import id.tiooooo.nontonterus.pages.detail.component.video.MovieDetailVideoSection
 import id.tiooooo.nontonterus.pages.review.DetailReviewScreen
@@ -89,11 +94,16 @@ fun MovieDetailScreen(
     val movieReviewsResult = state.movieReviews
 
     movieDetailResult.onLoading {
-        Box(modifier = modifier.fillMaxSize(), contentAlignment = Alignment.Center) {
-            CircularProgressIndicator(
+        Box(
+            modifier = modifier
+                .background(MaterialTheme.colorScheme.background)
+                .fillMaxSize(), contentAlignment = Alignment.Center
+        ) {
+            AnimatedPreloader(
                 modifier = Modifier
-                    .wrapContentWidth()
-                    .wrapContentHeight()
+                    .size(225.dp)
+                    .align(Alignment.Center),
+                animationRes = id.tiooooo.nontonterus.core.R.raw.lottie_loading,
             )
         }
     }
@@ -173,6 +183,29 @@ fun MovieDetailScreen(
                     )
                 }
             }
+        }
+    }
+
+    movieDetailResult.onError { message, _ ->
+        BaseScaffold(
+            topBar = {
+                BasicTopBarTitleView(
+                    title = stringRes("detail_title"),
+                    onBackClicked = { navigator.pop() }
+                )
+            }
+        ) {
+            BaseEmptyView(
+                modifier = Modifier
+                    .fillMaxSize()
+                    .padding(MEDIUM_PADDING),
+                title = message,
+                animationRes = id.tiooooo.nontonterus.core.R.raw.lottie_popcorn,
+                buttonText = stringRes("try_again"),
+                onButtonClicked = {
+                    screenModel.dispatch(MovieDetailIntent.FetchMovieDetail(movieId))
+                },
+            )
         }
     }
 }

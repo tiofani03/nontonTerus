@@ -10,5 +10,6 @@ object Constant {
     const val BASE_IMAGE_300 = "https://image.tmdb.org/t/p/w150/"
     const val DATE_FORMAT = "yyyy-MM-dd"
     const val LONG_DATE = "dd MMMM yyyy"
+    const val PREF_NAME = "NontonTerusPref"
     const val DATABASE_NAME = "nonton.db"
 }

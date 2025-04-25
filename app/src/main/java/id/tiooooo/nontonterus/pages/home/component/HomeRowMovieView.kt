@@ -11,9 +11,15 @@ import androidx.compose.foundation.layout.width
 import androidx.compose.foundation.lazy.LazyRow
 import androidx.compose.foundation.lazy.items
 import androidx.compose.runtime.Composable
+import androidx.compose.runtime.getValue
+import androidx.compose.runtime.mutableStateOf
+import androidx.compose.runtime.remember
+import androidx.compose.runtime.saveable.rememberSaveable
+import androidx.compose.runtime.setValue
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.unit.dp
 import id.tiooooo.nontonterus.core.network.data.States
+import id.tiooooo.nontonterus.core.network.data.onError
 import id.tiooooo.nontonterus.core.network.data.onLoading
 import id.tiooooo.nontonterus.core.network.data.onSuccess
 import id.tiooooo.nontonterus.core.ui.component.AnimatedShimmerItemView
@@ -30,16 +36,19 @@ fun HomeRowMovieView(
     onSeeMoreClicked: () -> Unit,
     onMovieClicked: (MovieResult) -> Unit,
 ) {
+    var isShowTitle by rememberSaveable { mutableStateOf(true) }
     Column(
         modifier = modifier,
     ) {
-        TitleLeftAndRightView(
-            modifier = Modifier
-                .fillMaxWidth(),
-            titleLeft = title,
-            isSeeMoreEnable = true,
-            onSeeMoreClicked = onSeeMoreClicked
-        )
+        if (isShowTitle){
+            TitleLeftAndRightView(
+                modifier = Modifier
+                    .fillMaxWidth(),
+                titleLeft = title,
+                isSeeMoreEnable = true,
+                onSeeMoreClicked = onSeeMoreClicked
+            )
+        }
         movies.onLoading {
             LazyRow(
                 modifier = Modifier.padding(top = SMALL_PADDING),
@@ -70,6 +79,9 @@ fun HomeRowMovieView(
                     )
                 }
             }
+        }
+        movies.onError { _, _ ->
+            isShowTitle = false
         }
     }
 }

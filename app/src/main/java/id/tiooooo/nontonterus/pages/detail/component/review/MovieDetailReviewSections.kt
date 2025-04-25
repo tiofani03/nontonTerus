@@ -1,22 +1,22 @@
 package id.tiooooo.nontonterus.pages.detail.component.review
 
-import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.Spacer
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.layout.padding
-import androidx.compose.material3.CircularProgressIndicator
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.remember
-import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.unit.dp
 import id.tiooooo.nontonterus.core.network.data.States
 import id.tiooooo.nontonterus.core.network.data.onLoading
 import id.tiooooo.nontonterus.core.network.data.onSuccess
+import id.tiooooo.nontonterus.core.ui.component.AnimatedShimmerItemView
 import id.tiooooo.nontonterus.core.ui.component.TitleLeftAndRightView
 import id.tiooooo.nontonterus.core.ui.theme.MEDIUM_PADDING
 import id.tiooooo.nontonterus.core.ui.theme.SMALL_PADDING
+import id.tiooooo.nontonterus.core.utils.localization.stringRes
 import id.tiooooo.nontonterus.movie.api.model.review.MovieReview
 
 @Composable
@@ -27,13 +27,19 @@ fun MovieDetailReviewsSection(
 ) {
 
     result.onLoading {
-        Box(
+        Column(
             modifier = Modifier
                 .fillMaxWidth()
                 .padding(MEDIUM_PADDING),
-            contentAlignment = Alignment.Center
         ) {
-            CircularProgressIndicator()
+            repeat(6) {
+                AnimatedShimmerItemView(
+                    modifier = Modifier
+                        .fillMaxWidth()
+                        .height(150.dp)
+                        .padding(bottom = SMALL_PADDING)
+                )
+            }
         }
     }
 
@@ -47,7 +53,7 @@ fun MovieDetailReviewsSection(
                         .padding(horizontal = MEDIUM_PADDING)
                         .padding(top = SMALL_PADDING)
                         .fillMaxWidth(),
-                    titleLeft = "Reviews",
+                    titleLeft = stringRes("detail_reviews"),
                     isSeeMoreEnable = reviews.size > 3,
                     onSeeMoreClicked = onSeeMoreClicked
                 )

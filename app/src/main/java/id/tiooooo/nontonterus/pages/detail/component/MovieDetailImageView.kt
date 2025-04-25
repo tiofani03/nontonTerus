@@ -19,6 +19,7 @@ import coil.compose.SubcomposeAsyncImage
 import coil.request.ImageRequest
 import id.tiooooo.nontonterus.core.ui.component.AnimatedShimmerItemView
 import id.tiooooo.nontonterus.core.ui.theme.MEDIUM_PADDING
+import id.tiooooo.nontonterus.core.ui.theme.SMALL_PADDING
 
 @Composable
 fun MovieDetailImageView(
@@ -54,7 +55,7 @@ fun MovieDetailImageView(
         Spacer(
             modifier = Modifier
                 .fillMaxWidth()
-                .height(MEDIUM_PADDING)
+                .height(SMALL_PADDING)
                 .align(Alignment.BottomCenter)
                 .background(
                     color = MaterialTheme.colorScheme.background,

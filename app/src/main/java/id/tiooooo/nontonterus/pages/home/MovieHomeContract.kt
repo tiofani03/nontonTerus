@@ -19,7 +19,12 @@ data class MovieHomeState(
     val genres: States<GenreList> = States.Loading,
     val movieFilterParams: MovieFilterParams = MovieFilterParams(),
     val searchHistory: List<SearchHistoryEntity> = listOf(),
+    val isShowTopRated: Boolean = true,
     val isSearchExpand: Boolean = false,
+    val isRefreshing: Boolean = false,
+    val isOpenDialogSetting: Boolean = false,
+    val activeTheme: String = "",
+    val selectedLanguage: String = "",
 )
 
 sealed interface MovieHomeIntent {
@@ -32,6 +37,11 @@ sealed interface MovieHomeIntent {
     data class UpdateSearchExpand(val isExpand: Boolean) : MovieHomeIntent
     data class SaveSearchQuery(val query: String) : MovieHomeIntent
     data class RemoveSearchQuery(val searchHistoryEntity: SearchHistoryEntity) : MovieHomeIntent
+    data class UpdateIsRefreshing(val isRefreshing: Boolean) : MovieHomeIntent
+    data class OnOpenDialogSetting(val isOpen: Boolean) : MovieHomeIntent
+    data class UpdateTheme(val value: String) : MovieHomeIntent
+    data class UpdateLanguage(val value: String) : MovieHomeIntent
+    data class UpdateShowTopRated(val value: Boolean): MovieHomeIntent
 }
 
 data class MovieFilterParams(

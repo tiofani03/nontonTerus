@@ -13,6 +13,7 @@ import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import id.tiooooo.nontonterus.core.ui.theme.EXTRA_SMALL_PADDING
 import id.tiooooo.nontonterus.core.ui.theme.SMALL_PADDING
+import id.tiooooo.nontonterus.core.utils.localization.stringRes
 
 @Composable
 fun PagingErrorLoadMoreView(
@@ -28,7 +29,7 @@ fun PagingErrorLoadMoreView(
         Text(message, color = MaterialTheme.colorScheme.error)
         Spacer(modifier = Modifier.height(EXTRA_SMALL_PADDING))
         OutlinedButton(onClick = onRetry) {
-            Text("Coba Lagi")
+            Text(stringRes("try_again"))
         }
     }
 }

@@ -11,6 +11,7 @@ import androidx.compose.runtime.Composable
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import id.tiooooo.nontonterus.core.ui.theme.SMALL_PADDING
+import id.tiooooo.nontonterus.core.utils.localization.stringRes
 
 @Composable
 fun PagingErrorStateView(
@@ -26,7 +27,7 @@ fun PagingErrorStateView(
         Text(message, color = MaterialTheme.colorScheme.error)
         Spacer(modifier = Modifier.height(SMALL_PADDING))
         Button(onClick = onRetry) {
-            Text("Coba Lagi")
+            Text(stringRes("try_again"))
         }
     }
 }
