@@ -20,6 +20,7 @@ import id.tiooooo.nontonterus.core.ui.base.BaseScaffold
 import id.tiooooo.nontonterus.core.ui.component.BasicTopBarTitleView
 import id.tiooooo.nontonterus.core.ui.theme.MEDIUM_PADDING
 import id.tiooooo.nontonterus.core.ui.theme.SMALL_PADDING
+import id.tiooooo.nontonterus.core.utils.pushOnce
 import id.tiooooo.nontonterus.pages.detail.MovieDetailRoute
 import id.tiooooo.nontonterus.pages.home.component.HomePosterView
 import id.tiooooo.nontonterus.pages.home.component.posterPagingView
@@ -29,20 +30,28 @@ fun MovieListScreen(
     modifier: Modifier = Modifier,
     screenModel: MovieListScreenModel,
     title: String,
+    genreId: String,
+    query: String,
     type: String,
 ) {
     val navigator = LocalNavigator.currentOrThrow
     val movies = screenModel.movies.collectAsLazyPagingItems()
 
     LaunchedEffect(type) {
-        screenModel.dispatch(MovieListIntent.OnTypeUpdate(type))
+        screenModel.dispatch(
+            MovieListIntent.OnArgumentUpdated(
+                type = type,
+                genreId = genreId,
+                query = query,
+            )
+        )
     }
 
     LaunchedEffect(Unit) {
         screenModel.effect.collect { effect ->
             when (effect) {
                 is MovieListEffect.NavigateToDetailMovie -> {
-                    navigator.push(
+                    navigator.pushOnce(
                         MovieDetailRoute(movieId = effect.id)
                     )
                 }

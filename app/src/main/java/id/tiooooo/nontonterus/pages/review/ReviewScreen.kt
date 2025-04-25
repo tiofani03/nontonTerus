@@ -23,6 +23,7 @@ import id.tiooooo.nontonterus.core.ui.component.paging.PagingErrorLoadMoreView
 import id.tiooooo.nontonterus.core.ui.component.paging.PagingErrorStateView
 import id.tiooooo.nontonterus.core.ui.theme.MEDIUM_PADDING
 import id.tiooooo.nontonterus.core.ui.theme.SMALL_PADDING
+import id.tiooooo.nontonterus.core.utils.pushOnce
 import id.tiooooo.nontonterus.pages.detail.component.review.MovieDetailReviewView
 
 @Composable
@@ -89,7 +90,7 @@ fun ReviewScreen(
                                     .padding(bottom = SMALL_PADDING),
                                 movieReview = item,
                                 onReviewClicked = {
-                                    navigator.push(
+                                    navigator.pushOnce(
                                         DetailReviewScreen(
                                             webViewUrl = item.url,
                                             movieName = movieName,

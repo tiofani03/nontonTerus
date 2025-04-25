@@ -5,10 +5,14 @@ sealed interface MovieListEffect {
 }
 
 data class MovieListState(
-    val type: String = "top_rated",
+    val type: String = "",
+    val query: String = "",
+    val genreId: String = "",
 )
 
 sealed interface MovieListIntent {
-    data class OnTypeUpdate(val type: String) : MovieListIntent
+    data class OnArgumentUpdated(val type: String, val query: String, val genreId: String) :
+        MovieListIntent
+
     data class OnMovieClicked(val id: Long) : MovieListIntent
 }

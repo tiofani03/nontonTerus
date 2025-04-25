@@ -175,7 +175,7 @@ class MovieRepositoryImpl(
         ).flow
     }
 
-    override fun getSearchHistory(): LiveData<List<SearchHistoryEntity>> =
+    override fun getSearchHistory(): Flow<List<SearchHistoryEntity>> =
         searchHistoryDao.getSearchHistory()
 
     override suspend fun insertSearchHistory(search: SearchHistoryEntity) {

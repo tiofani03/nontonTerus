@@ -34,7 +34,7 @@ interface MovieRepository {
 
     suspend fun getMovieByQuery(query: String): Flow<PagingData<MovieResult>>
 
-    fun getSearchHistory(): LiveData<List<SearchHistoryEntity>>
+    fun getSearchHistory(): Flow<List<SearchHistoryEntity>>
     suspend fun insertSearchHistory(search: SearchHistoryEntity)
     suspend fun deleteSearchHistory(search: SearchHistoryEntity)
     suspend fun updateSearchHistory(search: SearchHistoryEntity)

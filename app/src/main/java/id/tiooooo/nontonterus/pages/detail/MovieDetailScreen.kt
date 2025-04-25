@@ -27,6 +27,7 @@ import id.tiooooo.nontonterus.core.network.data.onSuccess
 import id.tiooooo.nontonterus.core.ui.base.BaseScaffold
 import id.tiooooo.nontonterus.core.ui.theme.EXTRA_EXTRA_HUGE_PADDING
 import id.tiooooo.nontonterus.core.ui.theme.MEDIUM_PADDING
+import id.tiooooo.nontonterus.core.utils.pushOnce
 import id.tiooooo.nontonterus.pages.detail.component.MovieDetailImageView
 import id.tiooooo.nontonterus.pages.detail.component.MovieDetailRatingView
 import id.tiooooo.nontonterus.pages.detail.component.MovieDetailTitleView
@@ -54,7 +55,7 @@ fun MovieDetailScreen(
         screenModel.effect.collect { effect ->
             when (effect) {
                 is MovieDetailEffect.NavigateToReviewSeeMore -> {
-                    navigator.push(
+                    navigator.pushOnce(
                         ReviewRoute(
                             movieId = effect.id,
                             movieName = effect.movieName,
@@ -63,7 +64,7 @@ fun MovieDetailScreen(
                 }
 
                 is MovieDetailEffect.NavigateToReviewDetail -> {
-                    navigator.push(
+                    navigator.pushOnce(
                         DetailReviewScreen(
                             webViewUrl = effect.url,
                             movieName = effect.movieName,
@@ -72,7 +73,7 @@ fun MovieDetailScreen(
                 }
 
                 is MovieDetailEffect.NavigateToVideo -> {
-                    navigator.push(
+                    navigator.pushOnce(
                         VideoPlayerScreen(
                             videoId = effect.key,
                         )

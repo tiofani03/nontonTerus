@@ -14,12 +14,9 @@ import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
-import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.text.font.FontWeight
 import id.tiooooo.nontonterus.core.ui.theme.EXTRA_SMALL_PADDING
-import id.tiooooo.nontonterus.core.ui.theme.MEDIUM_PADDING
 import id.tiooooo.nontonterus.core.ui.theme.SMALL_PADDING
-import id.tiooooo.nontonterus.core.ui.theme.textMedium12
 import id.tiooooo.nontonterus.core.ui.theme.textMedium24
 
 @Composable
@@ -48,15 +45,13 @@ fun MovieDetailTitleView(
                     Text(
                         modifier = Modifier
                             .background(
-                                color = MaterialTheme.colorScheme.primary.copy(0.3f),
-                                shape = RoundedCornerShape(SMALL_PADDING),
+                                color = MaterialTheme.colorScheme.surfaceVariant,
+                                shape = RoundedCornerShape(SMALL_PADDING)
                             )
-                            .padding(horizontal = MEDIUM_PADDING, vertical = SMALL_PADDING),
+                            .padding(horizontal = SMALL_PADDING, vertical = EXTRA_SMALL_PADDING),
                         text = it,
-                        color = Color.White,
-                        style = textMedium12().copy(
-                            fontWeight = FontWeight.Medium
-                        )
+                        style = MaterialTheme.typography.bodySmall,
+                        color = MaterialTheme.colorScheme.onSurface,
                     )
                 }
             }
