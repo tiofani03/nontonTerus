@@ -1,6 +1,5 @@
 package id.tiooooo.nontonterus.movie.implementation.remote.api
 
-import id.tiooooo.nontonterus.movie.implementation.remote.response.casts.CastsContainerResponse
 import id.tiooooo.nontonterus.movie.implementation.remote.response.detail.MovieDetailResponse
 import id.tiooooo.nontonterus.movie.implementation.remote.response.genre.GenreListResponse
 import id.tiooooo.nontonterus.movie.implementation.remote.response.list.MovieResultResponse
@@ -38,11 +37,6 @@ interface MovieApi {
         @Path("movieId") movieId: String,
         @Query("page") page: Int = 1,
     ): PagingResponse<MovieReviewResponse>
-
-    @GET("movie/{movieId}/credits")
-    suspend fun getMovieCasts(
-        @Path("movieId") movieId: String,
-    ): CastsContainerResponse
 
     @GET("movie/{movieId}/videos")
     suspend fun getMovieVideo(

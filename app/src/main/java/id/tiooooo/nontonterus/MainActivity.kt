@@ -13,6 +13,7 @@ import id.tiooooo.nontonterus.core.utils.localization.ProvideLocalization
 import id.tiooooo.nontonterus.core.utils.localization.rememberLocalization
 import id.tiooooo.nontonterus.core.utils.rememberAppTheme
 import id.tiooooo.nontonterus.pages.home.MovieHomeRoute
+import id.tiooooo.nontonterus.pages.splash.SplashRoute
 import org.koin.android.ext.android.inject
 
 class MainActivity : ComponentActivity() {
@@ -26,7 +27,7 @@ class MainActivity : ComponentActivity() {
             ProvideLocalization(localizationProvider) {
                 NontonTerusTheme(darkTheme) {
                     Navigator(
-                        screen = MovieHomeRoute(),
+                        screen = SplashRoute(),
                         disposeBehavior = NavigatorDisposeBehavior(),
                         onBackPressed = { true },
                     ) { navigator ->

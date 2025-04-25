@@ -10,7 +10,6 @@ import id.tiooooo.nontonterus.core.local.dao.SearchHistoryDao
 import id.tiooooo.nontonterus.core.local.entity.SearchHistoryEntity
 import id.tiooooo.nontonterus.core.network.data.States
 import id.tiooooo.nontonterus.core.network.data.toError
-import id.tiooooo.nontonterus.movie.api.model.casts.Cast
 import id.tiooooo.nontonterus.movie.api.model.detail.MovieDetail
 import id.tiooooo.nontonterus.movie.api.model.list.GenreList
 import id.tiooooo.nontonterus.movie.api.model.list.MovieResult
@@ -19,7 +18,6 @@ import id.tiooooo.nontonterus.movie.api.model.video.MovieVideo
 import id.tiooooo.nontonterus.movie.api.repository.MovieRepository
 import id.tiooooo.nontonterus.movie.implementation.datasource.DiscoverMoviePagingSource
 import id.tiooooo.nontonterus.movie.implementation.remote.api.MovieApi
-import id.tiooooo.nontonterus.movie.implementation.remote.response.casts.toCast
 import id.tiooooo.nontonterus.movie.implementation.remote.response.detail.toMovieDetail
 import id.tiooooo.nontonterus.movie.implementation.remote.response.genre.toGenreList
 import id.tiooooo.nontonterus.movie.implementation.remote.response.list.mapToMovieResult
@@ -133,22 +131,6 @@ class MovieRepositoryImpl(
                 MovieReviewPagingSource(movieApi, movieId)
             }
         ).flow
-    }
-
-    override suspend fun getMovieCasts(movieId: String): Flow<States<List<Cast>>> {
-        return flow {
-            try {
-                emit(States.Loading)
-                val response = movieApi.getMovieCasts(movieId)
-                response.cast?.let { list ->
-                    emit(States.Success(data = list.map { it.toCast() }))
-                } ?: run {
-                    emit(States.Empty)
-                }
-            } catch (e: Exception) {
-                emit(e.toError())
-            }
-        }.flowOn(ioDispatcher)
     }
 
     override suspend fun getMovieVideos(movieId: String): Flow<States<List<MovieVideo>>> {

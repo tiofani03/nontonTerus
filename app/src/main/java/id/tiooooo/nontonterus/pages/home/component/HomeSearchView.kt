@@ -1,5 +1,6 @@
 package id.tiooooo.nontonterus.pages.home.component
 
+import androidx.compose.animation.AnimatedVisibility
 import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Box
@@ -80,14 +81,16 @@ fun HomeSearchView(
             },
         )
 
-        IconButton(
-            modifier = Modifier.padding(end = SMALL_PADDING),
-            onClick = { onSettingsClicked() }
-        ) {
-            Icon(
-                imageVector = Icons.Default.Settings,
-                contentDescription = "Settings"
-            )
+        AnimatedVisibility(!state.isSearchExpand) {
+            IconButton(
+                modifier = Modifier.padding(end = SMALL_PADDING),
+                onClick = { onSettingsClicked() }
+            ) {
+                Icon(
+                    imageVector = Icons.Default.Settings,
+                    contentDescription = "Settings"
+                )
+            }
         }
     }
 }
