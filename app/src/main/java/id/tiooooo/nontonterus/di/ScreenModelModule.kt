@@ -7,7 +7,7 @@ import id.tiooooo.nontonterus.pages.review.ReviewScreenModel
 import org.koin.dsl.module
 
 val screenModelModule = module {
-    factory { MovieHomeScreenModel(get()) }
+    factory { MovieHomeScreenModel(get(), get(), get()) }
     factory { MovieListScreenModel(get()) }
     factory { MovieDetailScreenModel(get()) }
     factory { ReviewScreenModel(get()) }

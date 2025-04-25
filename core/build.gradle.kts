@@ -57,4 +57,5 @@ dependencies {
     implementation(libs.androidx.material.icons.extended)
     implementation(libs.androidx.ui.text.google.fonts)
     debugImplementation(libs.ui.tooling)
+    implementation(libs.lottie.compose)
 }

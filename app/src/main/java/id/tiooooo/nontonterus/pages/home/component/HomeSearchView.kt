@@ -1,6 +1,7 @@
 package id.tiooooo.nontonterus.pages.home.component
 
 import androidx.compose.foundation.clickable
+import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.Row
@@ -14,6 +15,7 @@ import androidx.compose.foundation.verticalScroll
 import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.automirrored.filled.ArrowBack
 import androidx.compose.material.icons.filled.Close
+import androidx.compose.material.icons.filled.Settings
 import androidx.compose.material3.ExperimentalMaterial3Api
 import androidx.compose.material3.Icon
 import androidx.compose.material3.IconButton
@@ -32,6 +34,7 @@ import id.tiooooo.nontonterus.core.local.entity.SearchHistoryEntity
 import id.tiooooo.nontonterus.core.ui.theme.MEDIUM_PADDING
 import id.tiooooo.nontonterus.core.ui.theme.SMALL_PADDING
 import id.tiooooo.nontonterus.core.ui.theme.ZERO_PADDING
+import id.tiooooo.nontonterus.core.utils.localization.stringRes
 import id.tiooooo.nontonterus.pages.home.MovieHomeIntent
 import id.tiooooo.nontonterus.pages.home.MovieHomeScreenModel
 import id.tiooooo.nontonterus.pages.home.MovieHomeState
@@ -41,37 +44,54 @@ fun HomeSearchView(
     modifier: Modifier = Modifier,
     state: MovieHomeState,
     screenModel: MovieHomeScreenModel,
-    textFieldState: TextFieldState
+    textFieldState: TextFieldState,
+    onSettingsClicked: () -> Unit = {},
 ) {
-    SimpleSearchBar(
+    Row(
         modifier = modifier,
-        expanded = state.isSearchExpand,
-        onExpandedChange = {
-            screenModel.dispatch(MovieHomeIntent.UpdateSearchExpand(it))
-        },
-        textFieldState = textFieldState,
-        onSearch = { query ->
-            screenModel.dispatch(
-                MovieHomeIntent.UpdateMovieFilterParams(
-                    state.movieFilterParams.copy(query = query)
+        verticalAlignment = Alignment.CenterVertically,
+    ) {
+        SimpleSearchBar(
+            modifier = Modifier.weight(1f),
+            expanded = state.isSearchExpand,
+            onExpandedChange = {
+                screenModel.dispatch(MovieHomeIntent.UpdateSearchExpand(it))
+            },
+            textFieldState = textFieldState,
+            onSearch = { query ->
+                screenModel.dispatch(
+                    MovieHomeIntent.UpdateMovieFilterParams(
+                        state.movieFilterParams.copy(query = query)
+                    )
                 )
-            )
-            screenModel.dispatch(MovieHomeIntent.OnSearchQueryClicked(query))
-        },
-        history = state.searchHistory,
-        onAddHistory = { query ->
-            if (query.isNotBlank() && state.searchHistory.none {
-                    it.query.contains(query, ignoreCase = true)
-                }) {
-                screenModel.dispatch(MovieHomeIntent.SaveSearchQuery(query))
                 screenModel.dispatch(MovieHomeIntent.OnSearchQueryClicked(query))
-            }
-        },
-        onRemoveHistory = { item ->
-            screenModel.dispatch(MovieHomeIntent.RemoveSearchQuery(item))
-        },
-    )
+            },
+            history = state.searchHistory,
+            onAddHistory = { query ->
+                if (query.isNotBlank() && state.searchHistory.none {
+                        it.query.contains(query, ignoreCase = true)
+                    }) {
+                    screenModel.dispatch(MovieHomeIntent.SaveSearchQuery(query))
+                    screenModel.dispatch(MovieHomeIntent.OnSearchQueryClicked(query))
+                }
+            },
+            onRemoveHistory = { item ->
+                screenModel.dispatch(MovieHomeIntent.RemoveSearchQuery(item))
+            },
+        )
+
+        IconButton(
+            modifier = Modifier.padding(end = SMALL_PADDING),
+            onClick = { onSettingsClicked() }
+        ) {
+            Icon(
+                imageVector = Icons.Default.Settings,
+                contentDescription = "Settings"
+            )
+        }
+    }
 }
+
 
 @OptIn(ExperimentalMaterial3Api::class)
 @Composable
@@ -117,7 +137,7 @@ fun SimpleSearchBar(
                     placeholder = {
                         Text(
                             modifier = Modifier.padding(start = SMALL_PADDING),
-                            text = "Search"
+                            text = stringRes("search"),
                         )
                     },
                     leadingIcon = if (expanded) {

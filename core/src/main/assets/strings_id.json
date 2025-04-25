@@ -1,0 +1,21 @@
+{
+  "home_genres": "Cari Berdasarkan Genre",
+  "home_now_playing": "Lagi Tayang Nih",
+  "home_popular_movies": "Film yang Lagi Hype",
+  "home_upcoming_movies": "Coming Soon 🔜",
+  "home_top_rated": "Rating Tinggi Banget ⭐",
+  "home_search_query": "Nyariin %s ya?",
+  "try_again": "Ulang Lagi Yuk",
+  "failed_to_load_data": "Waduh, ada error. Coba lagi bentar ya~",
+  "detail_reviews": "Komentar Warga Net",
+  "detail_rating_from": "Dari %s yang udah kasih rating",
+  "detail_title": "Info Lengkap Film",
+  "setting_title": "Atur Sesukamu",
+  "setting_language": "Bahasa Nih",
+  "setting_theme": "Ganti Suasana",
+  "setting_apply": "Gaskeun!",
+  "search": "Cari Yuk 🔍",
+  "theme_system": "Tema Sistem",
+  "theme_light_mode": "Mode Terang",
+  "theme_dark_mode": "Mode Gelap"
+}

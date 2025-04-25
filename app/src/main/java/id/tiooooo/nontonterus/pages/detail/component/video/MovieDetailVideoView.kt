@@ -4,6 +4,7 @@ import androidx.compose.foundation.background
 import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Box
+import androidx.compose.foundation.layout.PaddingValues
 import androidx.compose.foundation.layout.fillMaxHeight
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.fillMaxWidth
@@ -26,6 +27,7 @@ import androidx.compose.ui.unit.dp
 import coil.compose.SubcomposeAsyncImage
 import coil.request.ImageRequest
 import id.tiooooo.nontonterus.core.ui.component.AnimatedShimmerItemView
+import id.tiooooo.nontonterus.core.ui.theme.MEDIUM_PADDING
 import id.tiooooo.nontonterus.core.ui.theme.SMALL_PADDING
 import id.tiooooo.nontonterus.movie.api.model.video.MovieVideo
 
@@ -37,6 +39,7 @@ fun MovieDetailVideoView(
 ) {
     LazyRow(
         modifier = modifier,
+        contentPadding = PaddingValues(horizontal = MEDIUM_PADDING),
         horizontalArrangement = Arrangement.spacedBy(SMALL_PADDING)
     ) {
         items(videoList, key = { it.id }) { item ->

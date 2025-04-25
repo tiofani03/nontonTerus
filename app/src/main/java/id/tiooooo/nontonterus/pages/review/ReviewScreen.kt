@@ -23,6 +23,7 @@ import id.tiooooo.nontonterus.core.ui.component.paging.PagingErrorLoadMoreView
 import id.tiooooo.nontonterus.core.ui.component.paging.PagingErrorStateView
 import id.tiooooo.nontonterus.core.ui.theme.MEDIUM_PADDING
 import id.tiooooo.nontonterus.core.ui.theme.SMALL_PADDING
+import id.tiooooo.nontonterus.core.utils.localization.stringRes
 import id.tiooooo.nontonterus.core.utils.pushOnce
 import id.tiooooo.nontonterus.pages.detail.component.review.MovieDetailReviewView
 
@@ -118,8 +119,7 @@ fun ReviewScreen(
                         val error = (reviews.loadState.append as LoadState.Error).error
                         item {
                             PagingErrorLoadMoreView(
-                                message = error.localizedMessage
-                                    ?: "Gagal memuat lebih banyak review",
+                                message = stringRes("failed_to_load_data"),
                                 onRetry = { reviews.retry() }
                             )
                         }

@@ -1,6 +1,5 @@
 package id.tiooooo.nontonterus.movie.implementation.repository
 
-import androidx.lifecycle.LiveData
 import androidx.paging.Pager
 import androidx.paging.PagingConfig
 import androidx.paging.PagingData
@@ -82,7 +81,10 @@ class MovieRepositoryImpl(
     override suspend fun getDiscoverMovie(genreId: String): Flow<PagingData<MovieResult>> {
         return Pager(
             config = PagingConfig(
-                pageSize = 20
+                pageSize = 10,
+                prefetchDistance = 2,
+                initialLoadSize = 10,
+                enablePlaceholders = false
             ),
             pagingSourceFactory = {
                 DiscoverMoviePagingSource(movieApi, genreId)
@@ -94,6 +96,7 @@ class MovieRepositoryImpl(
         return flow {
             try {
                 emit(States.Loading)
+                kotlinx.coroutines.delay(600)
                 val response = movieApi.getDetailMovie(movieId)
                 emit(States.Success(data = response.toMovieDetail()))
             } catch (e: Exception) {

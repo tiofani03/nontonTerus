@@ -1,0 +1,21 @@
+{
+  "home_genres": "Pick a Vibe",
+  "home_now_playing": "Now Playing 🎬",
+  "home_popular_movies": "Trending Right Now",
+  "home_upcoming_movies": "Coming Soon 👀",
+  "home_top_rated": "Top-Tier Picks ⭐",
+  "home_search_query": "Searching %s for?",
+  "try_again": "Try Again, Bestie",
+  "failed_to_load_data": "Yikes, something went wrong. Try again later~",
+  "detail_reviews": "What People Are Saying",
+  "detail_rating_from": "Based on %s reviews",
+  "detail_title": "Movie Deets",
+  "setting_title": "Customize Your Vibe",
+  "setting_language": "Language, Please",
+  "setting_theme": "Switch the Mood",
+  "setting_apply": "Let's Go!",
+  "search": "Find It 🔍",
+  "theme_system": "System Theme",
+  "theme_light_mode": "Light Mode",
+  "theme_dark_mode": "Dark Mode"
+}
