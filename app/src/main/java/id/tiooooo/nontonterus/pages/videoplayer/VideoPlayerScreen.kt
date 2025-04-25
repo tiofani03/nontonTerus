@@ -62,7 +62,8 @@ class VideoPlayerScreen(val videoId: String) : Screen {
                                 }
 
                                 override fun onExitFullscreen() {
-
+                                    fullscreenView = null
+                                    isFullscreen = false
                                 }
                             })
 
