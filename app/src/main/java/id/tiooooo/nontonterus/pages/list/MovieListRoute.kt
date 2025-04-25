@@ -7,7 +7,9 @@ import cafe.adriel.voyager.core.screen.Screen
 import cafe.adriel.voyager.koin.koinScreenModel
 
 class MovieListRoute(
-    val type: String,
+    val type: String = "",
+    val genreId: String = "",
+    val query: String = "",
     val title: String,
 ) : Screen {
 
@@ -17,6 +19,8 @@ class MovieListRoute(
             modifier = Modifier.fillMaxSize(),
             screenModel = koinScreenModel(),
             type = type,
+            genreId = genreId,
+            query = query,
             title = title,
         )
     }

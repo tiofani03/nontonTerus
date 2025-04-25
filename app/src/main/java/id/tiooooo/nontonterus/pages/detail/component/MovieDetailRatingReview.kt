@@ -11,7 +11,6 @@ import androidx.compose.runtime.Composable
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.text.font.FontWeight
-import androidx.compose.ui.tooling.preview.Preview
 import id.tiooooo.nontonterus.core.ui.theme.EXTRA_SMALL_PADDING
 import id.tiooooo.nontonterus.core.ui.theme.SMALL_PADDING
 import id.tiooooo.nontonterus.core.ui.theme.textMedium14
@@ -46,14 +45,4 @@ fun MovieDetailRatingView(
             )
         )
     }
-}
-
-@Preview(showBackground = true)
-@Composable
-private fun MovieDetailRatingPrev() {
-    MovieDetailRatingView(
-        modifier = Modifier.fillMaxWidth().padding(SMALL_PADDING),
-        rating = 8.5,
-        reviewCount = 1000,
-    )
 }

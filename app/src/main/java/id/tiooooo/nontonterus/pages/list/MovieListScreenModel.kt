@@ -15,13 +15,19 @@ class MovieListScreenModel(
     @OptIn(ExperimentalCoroutinesApi::class)
     val movies = state
         .flatMapLatest {
-            movieRepository.getAllMovieByType(it.type)
+            if (it.query.isNotEmpty()) movieRepository.getMovieByQuery(it.query)
+            else if (it.genreId.isNotEmpty()) movieRepository.getDiscoverMovie(it.genreId)
+            else movieRepository.getAllMovieByType(it.type)
         }.cachedIn(screenModelScope)
 
     override fun reducer(state: MovieListState, intent: MovieListIntent): MovieListState {
         return when (intent) {
-            is MovieListIntent.OnTypeUpdate -> {
-                state.copy(type = intent.type)
+            is MovieListIntent.OnArgumentUpdated -> {
+                state.copy(
+                    type = intent.type,
+                    query = intent.query,
+                    genreId = intent.genreId,
+                )
             }
 
             else -> state
@@ -33,6 +39,7 @@ class MovieListScreenModel(
             is MovieListIntent.OnMovieClicked -> {
                 sendEffect(MovieListEffect.NavigateToDetailMovie(intent.id))
             }
+
             else -> Unit
         }
     }
