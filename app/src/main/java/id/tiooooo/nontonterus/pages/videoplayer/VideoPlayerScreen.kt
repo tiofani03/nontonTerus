@@ -30,16 +30,18 @@ class VideoPlayerScreen(val videoId: String) : Screen {
         var fullscreenView by remember { mutableStateOf<View?>(null) }
         var isFullscreen by remember { mutableStateOf(false) }
 
-        if (isFullscreen && fullscreenView != null) {
-            FullscreenVideoScreen(
-                fullscreenView = fullscreenView!!,
-                onExitFullscreen = {
-                    isFullscreen = false
-                    fullscreenView = null
-                    navigator.pop()
-                }
-            )
-        } else {
+        if (isFullscreen) {
+            fullscreenView?.let { nonNullFullscreenView ->
+                FullscreenVideoScreen(
+                    fullscreenView = nonNullFullscreenView,
+                    onExitFullscreen = {
+                        isFullscreen = false
+                        fullscreenView = null
+                        navigator.pop()
+                    }
+                )
+            }
+        }else {
             BaseScaffold {
                 AndroidView(
                     modifier = Modifier.fillMaxSize(),
