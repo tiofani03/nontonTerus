@@ -4,6 +4,7 @@ coilCompose = "2.5.0"
 converterGson = "2.9.0"
 datastore = "1.1.4"
 kotlin = "2.0.21"
+kotlinxCoroutinesTest = "1.9.0"
 ksp = "2.0.21-1.0.28"
 coreKtx = "1.15.0"
 junit = "4.13.2"
@@ -16,12 +17,14 @@ activityCompose = "1.10.1"
 composeBom = "2025.04.01"
 lottieCompose = "4.0.0"
 materialIconsExtended = "1.7.8"
+mockk = "1.13.9"
 pagingRuntimeKtx = "3.3.6"
 retrofit = "2.9.0"
 roomCompiler = "2.7.0"
 roomPaging = "2.7.0"
 roomRuntime = "2.7.0"
 retrofit2KotlinxSerializationConverter = "0.8.0"
+turbine = "1.2.0"
 uiTextGoogleFonts = "1.7.8"
 voyagerVersion = "1.1.0-beta02"
 uiTooling = "1.7.8"
@@ -51,14 +54,17 @@ androidx-ui-test-manifest = { group = "androidx.compose.ui", name = "ui-test-man
 androidx-ui-test-junit4 = { group = "androidx.compose.ui", name = "ui-test-junit4" }
 androidx-material3 = { group = "androidx.compose.material3", name = "material3" }
 androidx-room-runtime = { module = "androidx.room:room-runtime", version.ref = "roomRuntime" }
+kotlinx-coroutines-test = { module = "org.jetbrains.kotlinx:kotlinx-coroutines-test", version.ref = "kotlinxCoroutinesTest" }
 kotlinx-serialization-json = { module = "org.jetbrains.kotlinx:kotlinx-serialization-json", version.ref = "kotlinxSerializationJson" }
 koin-bom = { module = "io.insert-koin:koin-bom", version.ref = "koin-bom" }
 koin-core = { module = "io.insert-koin:koin-core" }
 koin-android = { module = "io.insert-koin:koin-android" }
 lottie-compose = { module = "com.airbnb.android:lottie-compose", version.ref = "lottieCompose" }
+mockk = { module = "io.mockk:mockk", version.ref = "mockk" }
 retrofit = { module = "com.squareup.retrofit2:retrofit", version.ref = "retrofit" }
 retrofit2-kotlinx-serialization-converter = { module = "com.jakewharton.retrofit:retrofit2-kotlinx-serialization-converter", version.ref = "retrofit2KotlinxSerializationConverter" }
 room-compiler = { module = "androidx.room:room-compiler", version.ref = "roomCompiler" }
+turbine = { module = "app.cash.turbine:turbine", version.ref = "turbine" }
 voyager-koin = { module = "cafe.adriel.voyager:voyager-koin", version.ref = "voyagerVersion" }
 voyager-navigator = { module = "cafe.adriel.voyager:voyager-navigator", version.ref = "voyagerVersion" }
 voyager-screenmodel = { module = "cafe.adriel.voyager:voyager-screenmodel", version.ref = "voyagerVersion" }
