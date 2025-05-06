@@ -1,5 +1,6 @@
 package id.tiooooo.nontonterus.pages.list
 
+import android.content.Intent
 import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.PaddingValues
@@ -17,6 +18,7 @@ import androidx.compose.runtime.LaunchedEffect
 import androidx.compose.runtime.collectAsState
 import androidx.compose.runtime.getValue
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.unit.dp
 import androidx.paging.compose.collectAsLazyPagingItems
 import cafe.adriel.voyager.navigator.LocalNavigator
@@ -27,8 +29,7 @@ import id.tiooooo.nontonterus.core.ui.component.BasicTopBarTitleView
 import id.tiooooo.nontonterus.core.ui.theme.MEDIUM_PADDING
 import id.tiooooo.nontonterus.core.ui.theme.SMALL_PADDING
 import id.tiooooo.nontonterus.core.utils.localization.stringRes
-import id.tiooooo.nontonterus.core.utils.pushOnce
-import id.tiooooo.nontonterus.pages.detail.MovieDetailRoute
+import id.tiooooo.nontonterus.pages.detail.DetailActivity
 import id.tiooooo.nontonterus.pages.home.component.HomePosterView
 import id.tiooooo.nontonterus.pages.home.component.posterPagingView
 
@@ -45,6 +46,7 @@ fun MovieListScreen(
     val navigator = LocalNavigator.currentOrThrow
     val movies = screenModel.movies.collectAsLazyPagingItems()
     val state by screenModel.state.collectAsState()
+    val context = LocalContext.current
 
     LaunchedEffect(type) {
         screenModel.dispatch(
@@ -60,9 +62,10 @@ fun MovieListScreen(
         screenModel.effect.collect { effect ->
             when (effect) {
                 is MovieListEffect.NavigateToDetailMovie -> {
-                    navigator.pushOnce(
-                        MovieDetailRoute(movieId = effect.id)
-                    )
+                    val intent = Intent(context, DetailActivity::class.java).apply {
+                        putExtra(DetailActivity.EXTRA_ID, effect.id)
+                    }
+                    context.startActivity(intent)
                 }
             }
         }
