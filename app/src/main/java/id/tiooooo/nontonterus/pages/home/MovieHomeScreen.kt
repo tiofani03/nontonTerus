@@ -1,5 +1,6 @@
 package id.tiooooo.nontonterus.pages.home
 
+import android.content.Intent
 import androidx.compose.animation.AnimatedVisibility
 import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.Arrangement
@@ -26,6 +27,7 @@ import androidx.compose.runtime.derivedStateOf
 import androidx.compose.runtime.getValue
 import androidx.compose.runtime.remember
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.unit.dp
 import androidx.paging.compose.collectAsLazyPagingItems
 import cafe.adriel.voyager.navigator.LocalNavigator
@@ -39,7 +41,7 @@ import id.tiooooo.nontonterus.core.utils.AppLanguage
 import id.tiooooo.nontonterus.core.utils.AppTheme
 import id.tiooooo.nontonterus.core.utils.localization.stringRes
 import id.tiooooo.nontonterus.core.utils.pushOnce
-import id.tiooooo.nontonterus.pages.detail.MovieDetailRoute
+import id.tiooooo.nontonterus.pages.detail.DetailActivity
 import id.tiooooo.nontonterus.pages.home.component.HomePosterView
 import id.tiooooo.nontonterus.pages.home.component.HomeRowGenreView
 import id.tiooooo.nontonterus.pages.home.component.HomeRowMovieView
@@ -59,6 +61,7 @@ fun MovieHomeScreen(
     val topRatedMovies = screenModel.topRatedMovies.collectAsLazyPagingItems()
     val textFieldState = rememberTextFieldState()
     val gridState = rememberLazyGridState()
+    val context = LocalContext.current
 
     val showSearchBar by remember {
         derivedStateOf {
@@ -79,9 +82,10 @@ fun MovieHomeScreen(
                 }
 
                 is MovieHomeEffect.NavigateToDetailMovie -> {
-                    navigator.pushOnce(
-                        MovieDetailRoute(movieId = effect.id)
-                    )
+                    val intent = Intent(context, DetailActivity::class.java).apply {
+                        putExtra(DetailActivity.EXTRA_ID, effect.id)
+                    }
+                    context.startActivity(intent)
                 }
 
                 is MovieHomeEffect.NavigateToMovieByGenre -> {

@@ -123,17 +123,20 @@ fun MovieDetailScreen(
                             .fillMaxWidth()
                             .height(400.dp),
                         image = movie.createBackdropPath(),
+                        rating = movie.voteAverage,
                     )
                 }
 
                 item {
-                    MovieDetailRatingView(
-                        modifier = Modifier
-                            .fillMaxWidth()
-                            .padding(horizontal = MEDIUM_PADDING),
-                        rating = movie.voteAverage,
-                        reviewCount = movie.voteCount,
-                    )
+                    if (movie.voteAverage > 6 && movie.voteAverage < 9) {
+                        MovieDetailRatingView(
+                            modifier = Modifier
+                                .fillMaxWidth()
+                                .padding(horizontal = MEDIUM_PADDING),
+                            rating = movie.voteAverage,
+                            reviewCount = movie.voteCount,
+                        )
+                    }
                 }
 
                 item {
